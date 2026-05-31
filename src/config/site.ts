@@ -1,8 +1,6 @@
 /**
  * Single source of truth for the Indra Bayu consulting site.
- *
- * Personal brand, first-person voice. To adjust positioning, edit this file only —
- * components read everything from here.
+ * Personal brand, first-person voice. Edit here only.
  */
 
 export interface NavLink {
@@ -34,7 +32,7 @@ export const site = {
     role: 'Software Consultant & Engineer',
     tagline: 'I build custom software and AI that fits how your business actually works.',
     intro:
-      "I'm an independent software consultant. I partner with teams to design, build, and ship custom platforms, automation, and AI features — shaped around your real workflow, not a template. You work directly with me, end to end.",
+      "I'm an independent software consultant. I partner with teams to design, build, and ship custom platforms, automation, and AI features, shaped around your real workflow, not a template. You work directly with me, end to end.",
     locationLabel: 'Indonesia · working worldwide',
   },
 
@@ -45,20 +43,19 @@ export const site = {
     { label: 'Contact', href: '#contact' },
   ] satisfies readonly NavLink[],
 
-  // Outcome-framed, in-demand offerings (2026). Honest — no fabricated metrics.
   services: [
     {
       id: 'ai-integration',
       title: 'AI Integration',
       blurb:
-        'Embed LLMs and automation into the tools your team already uses — to cut cost and speed up response times.',
+        'Embed LLMs and automation into the tools your team already uses, cutting cost and speeding up response times.',
       points: ['LLM features in existing apps', 'RAG over your own data', 'Guardrails & evaluation'],
     },
     {
       id: 'ai-agents',
       title: 'AI Agents & Automation',
       blurb:
-        'Agentic workflows that handle repetitive, judgment-light work — customer service, ops, and back-office tasks.',
+        'Agentic workflows that handle repetitive, judgment-light work: customer service, ops, and back-office tasks.',
       points: ['Task & workflow agents', 'Tool / API orchestration', 'Human-in-the-loop controls'],
     },
     {
@@ -72,7 +69,7 @@ export const site = {
       id: 'custom-dev',
       title: 'Custom Software Development',
       blurb:
-        'Web platforms, internal tools, and APIs built to match your exact business process — full-stack, production-ready.',
+        'Web platforms, internal tools, and APIs built to match your exact business process, full-stack, production-ready.',
       points: ['Web & internal platforms', 'API & integration design', 'MVP to production'],
     },
     {
@@ -84,33 +81,37 @@ export const site = {
     },
   ] satisfies readonly Service[],
 
-  approach: [
-    {
-      step: '01',
-      title: 'Understand the work',
-      body: 'I start with your process, not a tech stack — learning the workflow, the constraints, and the people who use it daily.',
-    },
-    {
-      step: '02',
-      title: 'Design around it',
-      body: 'Architecture and UX are shaped to fit how you work, so the software removes friction instead of adding it.',
-    },
-    {
-      step: '03',
-      title: 'Build iteratively',
-      body: 'Short cycles, working software early, continuous feedback. You see progress and steer it the whole way.',
-    },
-    {
-      step: '04',
-      title: 'Stay accountable',
-      body: 'I measure success by outcomes, not deliverables — and stay involved after launch to make sure it lands.',
-    },
-  ] satisfies readonly ApproachStep[],
+  approach: {
+    cycleLabel: 'Continuous\nDelivery',
+    steps: [
+      {
+        step: '01',
+        title: 'Discover',
+        body: 'Scope the problem together. Understand workflows, constraints, and what success looks like before writing a line of code.',
+      },
+      {
+        step: '02',
+        title: 'Design',
+        body: 'Architecture and approach shaped to fit the process. Plan the first sprint; scope it to a slice of real value.',
+      },
+      {
+        step: '03',
+        title: 'Build',
+        body: 'Short delivery cycles with working software from the start. You test and give feedback at the end of every sprint.',
+      },
+      {
+        step: '04',
+        title: 'Iterate',
+        body: 'Each cycle makes the product sharper. Review, reprioritize, and loop back until the outcome is right.',
+      },
+    ] satisfies readonly ApproachStep[],
+  },
 
   about: {
+    advisorLabel: 'Advisor',
     heading: 'A senior engineer you work with directly',
     body: [
-      "I've spent my career building production software — from web platforms and internal tools to data pipelines and, more recently, applied AI. I work hands-on across the stack, so the person scoping your project is the person writing the code.",
+      "I've spent my career building production software: from web platforms and internal tools to data pipelines and, more recently, applied AI. I work hands-on across the stack, so the person scoping your project is the person writing the code.",
       'I take on a small number of engagements at a time and treat each one like a long-term partnership. Selected work and references are available on request.',
     ],
     highlights: [
@@ -123,7 +124,6 @@ export const site = {
   contact: {
     // Replace with real handles before launch.
     email: 'hello@indrabayu.dev',
-    // E.164 without '+' for the wa.me link.
     whatsapp: '6281234567890',
     whatsappDisplay: '+62 812-3456-7890',
     socials: [
@@ -134,7 +134,7 @@ export const site = {
   },
 
   seo: {
-    title: 'Indra Bayu — Software Consultant & Engineer',
+    title: 'Indra Bayu, Software Consultant & Engineer',
     description:
       'Indra Bayu is an independent software consultant building custom software, automation, and applied AI shaped around your business process.',
     url: 'https://finendra.pages.dev',

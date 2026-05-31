@@ -1,30 +1,80 @@
 ---
 import { site } from '@/config/site';
 import SectionHeading from '../ui/SectionHeading.astro';
+
+const { steps, cycleLabel } = site.approach;
+const [line1, line2] = cycleLabel.split('\n');
 ---
 
 <section id="process" class="section process">
   <div class="container">
     <SectionHeading eyebrow="How I work" id="process-heading">
-      A clear, low-friction way of working
+      Agile, iterative, and built to adapt
       <span slot="lead">
-        I keep the process simple and the feedback frequent — so you always know
-        where things stand.
+        I work in short cycles so you see real progress fast and can steer at
+        every step.
       </span>
     </SectionHeading>
 
-    <ol class="steps">
-      {
-        site.approach.map((s, i) => (
-          <li class="step" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
-            <span class="step__num">{s.step}</span>
-            <div class="step__body">
-              <h3 class="step__title">{s.title}</h3>
-              <p class="step__text">{s.body}</p>
-            </div>
-          </li>
-        ))
-      }
+    <!-- Circle 360 diagram (desktop) -->
+    <figure class="cycle" aria-label="Iterative process cycle: Discover, Design, Build, Iterate">
+      <!-- Background circle + clockwise arrow arcs as inline SVG -->
+      <svg class="cycle__svg" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+        <!-- Dashed ring -->
+        <circle cx="200" cy="200" r="148" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="6 5"/>
+
+        <!-- 4 clockwise arc arrows between the cardinal nodes (each arc is ~80° sweep) -->
+        <!-- 12→3: top to right -->
+        <path d="M 248 68 A 148 148 0 0 1 332 248"
+              stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"
+              marker-end="url(#arrow)"/>
+        <!-- 3→6: right to bottom -->
+        <path d="M 332 252 A 148 148 0 0 1 152 332"
+              stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"
+              marker-end="url(#arrow)"/>
+        <!-- 6→9: bottom to left -->
+        <path d="M 148 332 A 148 148 0 0 1 68 152"
+              stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"
+              marker-end="url(#arrow)"/>
+        <!-- 9→12: left to top -->
+        <path d="M 68 148 A 148 148 0 0 1 248 68"
+              stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"
+              marker-end="url(#arrow)"/>
+
+        <defs>
+          <marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <path d="M 0 0 L 7 3.5 L 0 7 Z" fill="var(--color-accent)"/>
+          </marker>
+        </defs>
+      </svg>
+
+      <!-- Center label -->
+      <div class="cycle__center" aria-hidden="true">
+        <span class="cycle__center-line1">{line1}</span>
+        <span class="cycle__center-line2">{line2}</span>
+      </div>
+
+      <!-- 4 nodes at cardinal positions -->
+      {steps.map((s) => (
+        <div class={`cycle__node cycle__node--${s.step}`} data-reveal>
+          <span class="cycle__step">{s.step}</span>
+          <strong class="cycle__title">{s.title}</strong>
+          <p class="cycle__body">{s.body}</p>
+        </div>
+      ))}
+    </figure>
+
+    <!-- Mobile fallback list (shown when circle layout collapses) -->
+    <ol class="steps-list" aria-hidden="true">
+      {steps.map((s, i) => (
+        <li class="steps-list__item" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+          <span class="steps-list__num">{s.step}</span>
+          <div>
+            <strong class="steps-list__title">{s.title}</strong>
+            <p class="steps-list__body">{s.body}</p>
+          </div>
+        </li>
+      ))}
     </ol>
   </div>
 </section>
@@ -33,46 +83,178 @@ import SectionHeading from '../ui/SectionHeading.astro';
   .process {
     background: var(--color-bg-subtle);
   }
-  .steps {
-    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+
+  /* ---- Circle layout (medium+) ---- */
+  .cycle {
+    margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+    display: none; /* hidden on mobile, shown at 36rem+ */
+    position: relative;
+    width: min(32rem, 90vw);
+    aspect-ratio: 1;
+  }
+
+  .cycle__svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cycle__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    width: 7rem;
+    text-align: center;
+  }
+  .cycle__center-line1 {
+    font-weight: 800;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+  .cycle__center-line2 {
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    font-weight: 500;
+  }
+
+  /* Node base — centered text box */
+  .cycle__node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.2rem;
+    width: 7.5rem;
+    padding: 0.85rem 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--duration-normal) var(--ease-out-expo),
+                border-color var(--duration-normal) var(--ease-out-expo);
+  }
+  .cycle__node:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Cardinal placements: 12, 3, 6, 9 o'clock */
+  .cycle__node--01 { /* top */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cycle__node--02 { /* right */
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+  .cycle__node--03 { /* bottom */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cycle__node--04 { /* left */
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .cycle__step {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+  }
+  .cycle__title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .cycle__body {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    line-height: 1.45;
+    margin: 0;
+    display: none; /* shown at larger sizes */
+  }
+
+  /* ---- Mobile fallback list ---- */
+  .steps-list {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
     padding: 0;
     list-style: none;
-    display: grid;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
   }
-  .step {
+  .steps-list__item {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(1rem, 3vw, 2rem);
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0.75rem;
     align-items: start;
-    padding: clamp(1.25rem, 3vw, 1.75rem);
+    padding: 1.25rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    transition: transform var(--duration-normal) var(--ease-out-expo);
   }
-  .step:hover {
-    transform: translateY(-3px);
-  }
-  .step__num {
+  .steps-list__num {
     font-family: var(--font-mono);
-    font-size: var(--text-lg);
-    font-weight: 600;
+    font-size: var(--text-base);
+    font-weight: 700;
     color: var(--color-accent);
-    line-height: 1.4;
   }
-  .step__title {
-    font-size: var(--text-lg);
-    margin-bottom: 0.4rem;
+  .steps-list__title {
+    display: block;
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
   }
-  .step__text {
+  .steps-list__body {
+    font-size: var(--text-sm);
     color: var(--color-text-muted);
-    max-width: 60ch;
+    margin: 0;
   }
-  @media (min-width: 48rem) {
-    .steps {
-      grid-template-columns: repeat(2, 1fr);
+
+  /* ---- Responsive breakpoints ---- */
+  @media (min-width: 36rem) {
+    .cycle {
+      display: block; /* show circle */
+    }
+    .steps-list {
+      display: none; /* hide list */
+    }
+  }
+
+  @media (min-width: 44rem) {
+    .cycle__body {
+      display: block; /* show body text inside nodes at larger sizes */
+    }
+  }
+
+  @media (min-width: 52rem) {
+    .cycle {
+      width: min(38rem, 90vw);
+    }
+    .cycle__node {
+      width: 9rem;
+      padding: 1rem 0.75rem;
+    }
+    .cycle__title {
+      font-size: var(--text-base);
+    }
+    .cycle__body {
+      font-size: var(--text-xs);
     }
   }
 </style>
