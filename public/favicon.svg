@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="FINENDRA">
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Indra Bayu">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#e8c473" />
-      <stop offset="1" stop-color="#c79a4e" />
+      <stop offset="0" stop-color="#3b6fd4" />
+      <stop offset="1" stop-color="#2f57ad" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="#1a140f" />
-  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" fill="none" stroke="url(#g)" stroke-opacity="0.5" />
-  <path d="M22 18 H44 V25 H30 V31 H42 V38 H30 V48 H22 Z" fill="url(#g)" />
+  <rect width="64" height="64" rx="16" fill="url(#g)" />
+  <text x="32" y="43" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#ffffff">IB</text>
 </svg>

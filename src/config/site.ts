@@ -1,14 +1,8 @@
 /**
- * Single source of truth for the FINENDRA company-profile site.
+ * Single source of truth for the Indra Bayu consulting site.
  *
- * The brand name is a WORKING PLACEHOLDER ("FINENDRA" = Fina + Indra via the
- * Javanese "-endra" royal suffix). To swap the final name, change `brand.name`,
- * `brand.nameAksara`, and the contact handles below — nothing else references
- * the literal name.
- *
- * NOTE on `brand.nameAksara`: this is a best-effort Aksara Jawa (Javanese script)
- * transliteration rendered with the Noto Sans Javanese webfont. It is decorative
- * (aria-hidden) and SHOULD BE REVIEWED by a native reader before launch.
+ * Personal brand, first-person voice. To adjust positioning, edit this file only —
+ * components read everything from here.
  */
 
 export interface NavLink {
@@ -20,8 +14,6 @@ export interface Service {
   readonly id: string;
   readonly title: string;
   readonly blurb: string;
-  /** Bento span hint: 'wide' | 'tall' | 'normal' */
-  readonly span: 'wide' | 'tall' | 'normal';
   readonly points: readonly string[];
 }
 
@@ -31,21 +23,6 @@ export interface ApproachStep {
   readonly body: string;
 }
 
-export interface Engagement {
-  readonly sector: string;
-  readonly title: string;
-  readonly summary: string;
-  readonly outcome: string;
-}
-
-export interface Founder {
-  readonly name: string;
-  readonly role: string;
-  readonly focus: string;
-  /** initials used for the avatar monogram */
-  readonly initials: string;
-}
-
 export interface SocialLink {
   readonly label: string;
   readonly href: string;
@@ -53,138 +30,113 @@ export interface SocialLink {
 
 export const site = {
   brand: {
-    name: 'FINENDRA',
-    /** Best-effort Aksara Jawa rendering of the name — REVIEW before launch. */
-    nameAksara: 'ꦥ꦳ꦶꦤꦺꦤ꧀ꦢꦿ',
-    suffix: 'Consulting',
-    tagline: 'Bespoke software, shaped around your business process.',
+    name: 'Indra Bayu',
+    role: 'Software Consultant & Engineer',
+    tagline: 'I build custom software and AI that fits how your business actually works.',
     intro:
-      'We are a custom development consultancy. Every engagement is treated like a long-term client relationship — we study how your business actually runs, then build software that fits it precisely. No templates, no forced workflows.',
+      "I'm an independent software consultant. I partner with teams to design, build, and ship custom platforms, automation, and AI features — shaped around your real workflow, not a template. You work directly with me, end to end.",
     locationLabel: 'Indonesia · working worldwide',
   },
 
   nav: [
     { label: 'Services', href: '#services' },
-    { label: 'Approach', href: '#approach' },
-    { label: 'Work', href: '#work' },
-    { label: 'Team', href: '#team' },
+    { label: 'Process', href: '#process' },
+    { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ] satisfies readonly NavLink[],
 
+  // Outcome-framed, in-demand offerings (2026). Honest — no fabricated metrics.
   services: [
+    {
+      id: 'ai-integration',
+      title: 'AI Integration',
+      blurb:
+        'Embed LLMs and automation into the tools your team already uses — to cut cost and speed up response times.',
+      points: ['LLM features in existing apps', 'RAG over your own data', 'Guardrails & evaluation'],
+    },
+    {
+      id: 'ai-agents',
+      title: 'AI Agents & Automation',
+      blurb:
+        'Agentic workflows that handle repetitive, judgment-light work — customer service, ops, and back-office tasks.',
+      points: ['Task & workflow agents', 'Tool / API orchestration', 'Human-in-the-loop controls'],
+    },
+    {
+      id: 'doc-processing',
+      title: 'Document & Data Processing',
+      blurb:
+        'Pipelines that extract, classify, and route documents and data automatically, with accuracy you can trust.',
+      points: ['Intelligent extraction', 'Validation & routing', 'Dashboards & reporting'],
+    },
     {
       id: 'custom-dev',
       title: 'Custom Software Development',
       blurb:
-        'Web platforms, internal tools, and APIs built to match your exact business process — not the other way around.',
-      span: 'wide',
-      points: ['Web & internal platforms', 'API & integration design', 'Process-driven architecture'],
-    },
-    {
-      id: 'automation',
-      title: 'Workflow Automation',
-      blurb:
-        'We map the manual steps that slow your team down and replace them with reliable, observable automation.',
-      span: 'normal',
-      points: ['Pipeline & job orchestration', 'Data & document workflows'],
+        'Web platforms, internal tools, and APIs built to match your exact business process — full-stack, production-ready.',
+      points: ['Web & internal platforms', 'API & integration design', 'MVP to production'],
     },
     {
       id: 'consulting',
       title: 'Technical Consulting',
       blurb:
-        'Architecture reviews, technology selection, and pragmatic roadmaps grounded in how your business really operates.',
-      span: 'normal',
-      points: ['Architecture & scalability', 'Build-vs-buy guidance'],
-    },
-    {
-      id: 'ai',
-      title: 'Applied AI & Data',
-      blurb:
-        'Practical AI features and data products that solve a named problem and earn their keep.',
-      span: 'tall',
-      points: ['LLM-powered features', 'Data pipelines & dashboards', 'Retrieval & automation agents'],
-    },
-    {
-      id: 'product',
-      title: 'Product Engineering',
-      blurb:
-        'From first prototype to production — we partner through the whole build, iterating with your business.',
-      span: 'normal',
-      points: ['MVP to production', 'Iterative delivery'],
+        'Architecture reviews, technology selection, and pragmatic AI-adoption roadmaps grounded in how you operate.',
+      points: ['Architecture & scalability', 'Build-vs-buy guidance', 'AI adoption roadmap'],
     },
   ] satisfies readonly Service[],
 
   approach: [
     {
       step: '01',
-      title: 'Understand the business',
-      body: 'We start with your process, not a tech stack. We learn the workflow, the constraints, and the people who use it daily.',
+      title: 'Understand the work',
+      body: 'I start with your process, not a tech stack — learning the workflow, the constraints, and the people who use it daily.',
     },
     {
       step: '02',
-      title: 'Design around the process',
-      body: 'Architecture and UX are shaped to fit how you work — bespoke by default, so the software removes friction instead of adding it.',
+      title: 'Design around it',
+      body: 'Architecture and UX are shaped to fit how you work, so the software removes friction instead of adding it.',
     },
     {
       step: '03',
       title: 'Build iteratively',
-      body: 'Short cycles, working software early, and continuous feedback. You see progress and steer it the whole way.',
+      body: 'Short cycles, working software early, continuous feedback. You see progress and steer it the whole way.',
     },
     {
       step: '04',
-      title: 'Partner long-term',
-      body: 'Every project is treated like a client relationship. We stay accountable for outcomes, not just deliverables.',
+      title: 'Stay accountable',
+      body: 'I measure success by outcomes, not deliverables — and stay involved after launch to make sure it lands.',
     },
   ] satisfies readonly ApproachStep[],
 
-  // Honest capability framing (no fabricated client logos) until real case studies exist.
-  work: [
-    {
-      sector: 'Operations',
-      title: 'Process-fit internal platforms',
-      summary: 'Replacing spreadsheets and manual handoffs with tools modelled on the real workflow.',
-      outcome: 'Less rework, clearer ownership, faster cycle times.',
-    },
-    {
-      sector: 'Automation',
-      title: 'Content & data pipelines',
-      summary: 'Automated multi-step pipelines that move, transform, and publish data reliably.',
-      outcome: 'Hours of manual work removed each week.',
-    },
-    {
-      sector: 'Applied AI',
-      title: 'LLM-assisted workflows',
-      summary: 'Embedding language models into real business steps with guardrails and observability.',
-      outcome: 'Faster decisions without losing control.',
-    },
-  ] satisfies readonly Engagement[],
-
-  // EDIT roles/focus freely — these are placeholders for the founding team.
-  founders: [
-    { name: 'Indra Bayu', role: 'Founder & Principal Consultant', focus: 'Architecture · client strategy', initials: 'IB' },
-    { name: 'Fina Alamanda', role: 'Co-Founder & Delivery Lead', focus: 'Product · delivery', initials: 'FA' },
-    { name: 'Malika Shanum', role: 'Design & Experience Lead', focus: 'UX · brand · research', initials: 'MS' },
-    { name: 'Elfathan Akhyar', role: 'Engineering Lead', focus: 'Platforms · integration', initials: 'EA' },
-    { name: 'Arrayan Aqsha', role: 'Automation & Data Lead', focus: 'Automation · applied AI', initials: 'AA' },
-  ] satisfies readonly Founder[],
+  about: {
+    heading: 'A senior engineer you work with directly',
+    body: [
+      "I've spent my career building production software — from web platforms and internal tools to data pipelines and, more recently, applied AI. I work hands-on across the stack, so the person scoping your project is the person writing the code.",
+      'I take on a small number of engagements at a time and treat each one like a long-term partnership. Selected work and references are available on request.',
+    ],
+    highlights: [
+      'Full-stack product engineering',
+      'Applied AI & automation',
+      'Direct, senior-level delivery',
+    ],
+  },
 
   contact: {
-    // Replace with the real handles before launch.
-    email: 'hello@finendra.com',
+    // Replace with real handles before launch.
+    email: 'hello@indrabayu.dev',
     // E.164 without '+' for the wa.me link.
     whatsapp: '6281234567890',
     whatsappDisplay: '+62 812-3456-7890',
     socials: [
       { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-      { label: 'Instagram', href: 'https://www.instagram.com/' },
       { label: 'GitHub', href: 'https://github.com/ndruw2' },
+      { label: 'Email', href: 'mailto:hello@indrabayu.dev' },
     ] satisfies readonly SocialLink[],
   },
 
   seo: {
-    title: 'FINENDRA — Bespoke Software Consulting',
+    title: 'Indra Bayu — Software Consultant & Engineer',
     description:
-      'FINENDRA is a custom software development consultancy. We build web platforms, automation, and applied AI shaped precisely around your business process.',
+      'Indra Bayu is an independent software consultant building custom software, automation, and applied AI shaped around your business process.',
     url: 'https://finendra.pages.dev',
     locale: 'en',
     ogImage: '/og-image.png',

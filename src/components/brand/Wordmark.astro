@@ -2,22 +2,25 @@
 import { site } from '@/config/site';
 
 interface Props {
-  /** show the "Consulting" suffix */
-  suffix?: boolean;
-  /** include the small Aksara Jawa mark before the wordmark */
-  mark?: boolean;
+  /** show the role as a small line under the name */
+  role?: boolean;
   size?: 'sm' | 'md';
 }
 
-const { suffix = false, mark = true, size = 'sm' } = Astro.props;
-const { name, suffix: suffixText, nameAksara } = site.brand;
+const { role = false, size = 'sm' } = Astro.props;
+const { name, role: roleText } = site.brand;
+const initials = name
+  .split(' ')
+  .map((w) => w[0])
+  .join('')
+  .slice(0, 2);
 ---
 
-<a class={`wordmark wordmark--${size}`} href="/" aria-label={`${name} ${suffixText}, home`}>
-  {mark && <span class="wordmark__aksara" aria-hidden="true">{nameAksara}</span>}
+<a class={`wordmark wordmark--${size}`} href="/" aria-label={`${name}, home`}>
+  <span class="wordmark__badge" aria-hidden="true">{initials}</span>
   <span class="wordmark__text">
     <span class="wordmark__name">{name}</span>
-    {suffix && <span class="wordmark__suffix">{suffixText}</span>}
+    {role && <span class="wordmark__role">{roleText}</span>}
   </span>
 </a>
 
@@ -28,32 +31,34 @@ const { name, suffix: suffixText, nameAksara } = site.brand;
     gap: 0.6rem;
     line-height: 1;
   }
-  .wordmark__aksara {
-    font-family: var(--font-aksara);
-    font-size: 1.6em;
-    color: var(--color-gold);
-    line-height: 1;
-    transform: translateY(0.05em);
+  .wordmark__badge {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.55rem;
+    background: var(--grad-accent);
+    color: var(--color-on-accent);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
   .wordmark__text {
     display: inline-flex;
-    align-items: baseline;
-    gap: 0.5ch;
+    flex-direction: column;
+    gap: 0.15rem;
   }
   .wordmark__name {
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: var(--text-base);
   }
   .wordmark--md .wordmark__name {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
   }
-  .wordmark__suffix {
-    font-family: var(--font-body);
+  .wordmark__role {
     font-size: var(--text-xs);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: var(--color-text-faint);
+    letter-spacing: 0.01em;
   }
 </style>

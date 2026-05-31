@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
 <footer class="ftr">
   <div class="container ftr__inner">
     <div class="ftr__brand">
-      <Wordmark suffix={true} mark={true} />
+      <Wordmark role={true} />
       <p class="ftr__tag">{site.brand.tagline}</p>
     </div>
     <nav class="ftr__nav" aria-label="Footer">
@@ -16,8 +16,18 @@ const year = new Date().getFullYear();
     </nav>
   </div>
   <div class="container ftr__legal">
-    <span>© {year} {site.brand.name} {site.brand.suffix}. {site.brand.locationLabel}.</span>
-    <span class="ftr__aksara" aria-hidden="true">{site.brand.nameAksara}</span>
+    <span>© {year} {site.brand.name}. {site.brand.locationLabel}.</span>
+    <ul class="ftr__social" role="list">
+      {
+        site.contact.socials.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </footer>
 
@@ -26,6 +36,7 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--color-border);
     padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
     margin-top: var(--space-section);
+    background: var(--color-bg-subtle);
   }
   .ftr__inner {
     display: flex;
@@ -35,22 +46,25 @@ const year = new Date().getFullYear();
   }
   .ftr__tag {
     margin-top: 0.9rem;
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
     font-size: var(--text-sm);
-    max-width: 32ch;
+    max-width: 34ch;
   }
   .ftr__nav {
     display: flex;
     flex-wrap: wrap;
     gap: 1.25rem;
     font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--color-text-muted);
   }
   .ftr__nav a:hover {
-    color: var(--color-gold);
+    color: var(--color-accent);
   }
   .ftr__legal {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     align-items: center;
     justify-content: space-between;
     margin-top: 2.5rem;
@@ -59,11 +73,15 @@ const year = new Date().getFullYear();
     font-size: var(--text-xs);
     color: var(--color-text-faint);
   }
-  .ftr__aksara {
-    font-family: var(--font-aksara);
-    font-size: 1.5rem;
-    color: var(--color-gold);
-    opacity: 0.55;
+  .ftr__social {
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ftr__social a:hover {
+    color: var(--color-accent);
   }
   @media (min-width: 48rem) {
     .ftr__inner {

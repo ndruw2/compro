@@ -3,13 +3,13 @@ import { site } from '@/config/site';
 import SectionHeading from '../ui/SectionHeading.astro';
 ---
 
-<section id="approach" class="section approach">
+<section id="process" class="section process">
   <div class="container">
-    <SectionHeading eyebrow="How we work" id="approach-heading">
-      Every project, treated like a client
+    <SectionHeading eyebrow="How I work" id="process-heading">
+      A clear, low-friction way of working
       <span slot="lead">
-        We study the business before we write code. The process leads; the
-        software follows.
+        I keep the process simple and the feedback frequent — so you always know
+        where things stand.
       </span>
     </SectionHeading>
 
@@ -30,49 +30,49 @@ import SectionHeading from '../ui/SectionHeading.astro';
 </section>
 
 <style>
+  .process {
+    background: var(--color-bg-subtle);
+  }
   .steps {
-    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 0;
-    counter-reset: step;
+    gap: 1rem;
   }
   .step {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: clamp(1rem, 4vw, 3rem);
-    padding-block: clamp(1.5rem, 3vw, 2.25rem);
-    border-top: 1px solid var(--color-border);
-    transition: padding-left var(--duration-normal) var(--ease-out-expo);
-  }
-  .step:last-child {
-    border-bottom: 1px solid var(--color-border);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: start;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-normal) var(--ease-out-expo);
   }
   .step:hover {
-    padding-left: 0.75rem;
+    transform: translateY(-3px);
   }
   .step__num {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    color: oklch(81% 0.13 85 / 0.45);
-    line-height: 1;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-accent);
+    line-height: 1.4;
   }
   .step__title {
-    font-size: var(--text-xl);
-    margin-bottom: 0.5rem;
+    font-size: var(--text-lg);
+    margin-bottom: 0.4rem;
   }
   .step__text {
     color: var(--color-text-muted);
     max-width: 60ch;
   }
   @media (min-width: 48rem) {
-    .step {
-      grid-template-columns: 5rem 1fr;
-      align-items: baseline;
-    }
-    .step__num {
-      font-size: var(--text-3xl);
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>

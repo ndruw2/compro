@@ -7,7 +7,7 @@ const waHref = `https://wa.me/${site.contact.whatsapp}`;
 
 <header class="hdr">
   <div class="container hdr__inner">
-    <Wordmark suffix={false} mark={true} />
+    <Wordmark role={false} />
     <nav class="hdr__nav" aria-label="Primary">
       {site.nav.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
@@ -22,8 +22,8 @@ const waHref = `https://wa.me/${site.contact.whatsapp}`;
     position: sticky;
     top: 0;
     z-index: 50;
-    backdrop-filter: blur(14px);
-    background: oklch(15% 0.012 70 / 0.72);
+    backdrop-filter: blur(12px);
+    background: oklch(99% 0.003 250 / 0.8);
     border-bottom: 1px solid var(--color-border);
   }
   .hdr__inner {
@@ -31,12 +31,13 @@ const waHref = `https://wa.me/${site.contact.whatsapp}`;
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    min-height: 4.5rem;
+    min-height: 4.25rem;
   }
   .hdr__nav {
     display: none;
     gap: 1.75rem;
     font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--color-text-muted);
   }
   .hdr__nav a {
@@ -49,8 +50,9 @@ const waHref = `https://wa.me/${site.contact.whatsapp}`;
     left: 0;
     bottom: -0.4rem;
     width: 100%;
-    height: 1px;
-    background: var(--color-gold);
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-accent);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--duration-normal) var(--ease-out-expo);
@@ -63,21 +65,22 @@ const waHref = `https://wa.me/${site.contact.whatsapp}`;
   }
   .hdr__cta {
     display: none;
-    padding: 0.6rem 1.15rem;
+    padding: 0.55rem 1.1rem;
     border-radius: 999px;
-    border: 1px solid var(--color-border-strong);
+    background: var(--color-text);
+    color: var(--color-bg);
     font-size: var(--text-sm);
     font-weight: 600;
-    transition: border-color var(--duration-fast), color var(--duration-fast);
+    transition:
+      transform var(--duration-fast) var(--ease-out-expo),
+      background-color var(--duration-fast) var(--ease-out-expo);
   }
   .hdr__cta:hover {
-    border-color: var(--color-gold);
-    color: var(--color-gold);
+    transform: translateY(-1px);
+    background: var(--color-accent);
   }
   @media (min-width: 52rem) {
-    .hdr__nav {
-      display: flex;
-    }
+    .hdr__nav,
     .hdr__cta {
       display: inline-flex;
     }

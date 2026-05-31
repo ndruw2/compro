@@ -8,34 +8,33 @@ const H = 630;
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ecca7a"/>
-      <stop offset="1" stop-color="#c2944a"/>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b6fd4"/>
+      <stop offset="1" stop-color="#2f57ad"/>
     </linearGradient>
-    <radialGradient id="aura" cx="78%" cy="18%" r="80%">
-      <stop offset="0" stop-color="#5a4422" stop-opacity="0.55"/>
-      <stop offset="55%" stop-color="#23303a" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#140f0a" stop-opacity="0"/>
+    <radialGradient id="aura" cx="88%" cy="6%" r="70%">
+      <stop offset="0" stop-color="#dfe8fb" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <rect width="${W}" height="${H}" fill="#140f0a"/>
+  <rect width="${W}" height="${H}" fill="#fbfcfe"/>
   <rect width="${W}" height="${H}" fill="url(#aura)"/>
-  <rect x="20" y="20" width="${W - 40}" height="${H - 40}" rx="28" fill="none" stroke="#e8c473" stroke-opacity="0.18"/>
+  <rect x="20" y="20" width="${W - 40}" height="${H - 40}" rx="28" fill="none" stroke="#e3e8f0"/>
 
-  <!-- gold monogram -->
-  <g transform="translate(90,86)">
-    <rect width="74" height="74" rx="18" fill="#1a140f" stroke="#e8c473" stroke-opacity="0.5"/>
-    <path d="M24 20 H52 V29 H35 V36 H49 V45 H35 V56 H24 Z" fill="url(#gold)"/>
+  <!-- monogram + name -->
+  <g transform="translate(90,84)">
+    <rect width="74" height="74" rx="18" fill="url(#accent)"/>
+    <text x="37" y="50" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff">IB</text>
   </g>
-  <text x="184" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="6" fill="#efe7d6">FINENDRA</text>
-  <text x="186" y="166" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="8" fill="#b59e7a">CONSULTING</text>
+  <text x="184" y="124" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#1d2a44">Indra Bayu</text>
+  <text x="186" y="154" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#5b6b84">Software Consultant &amp; Engineer</text>
 
   <!-- headline -->
-  <text x="90" y="350" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="600" fill="#f3ecdd">Bespoke software,</text>
-  <text x="90" y="448" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-style="italic" fill="url(#gold)">shaped to your process.</text>
+  <text x="90" y="345" font-family="Helvetica, Arial, sans-serif" font-size="64" font-weight="800" fill="#1d2a44">Custom software &amp; AI,</text>
+  <text x="90" y="425" font-family="Helvetica, Arial, sans-serif" font-size="64" font-weight="800" fill="#1d2a44">built around <tspan fill="#3b6fd4">your business.</tspan></text>
 
-  <text x="90" y="540" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#b7a888">Custom development · automation · applied AI</text>
+  <text x="90" y="535" font-family="Helvetica, Arial, sans-serif" font-size="25" fill="#5b6b84">AI integration · agents &amp; automation · full-stack development</text>
 </svg>`;
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer();

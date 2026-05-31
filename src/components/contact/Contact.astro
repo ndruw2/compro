@@ -9,20 +9,19 @@ const mailHref = `mailto:${email}`;
 
 <section id="contact" class="section">
   <div class="container">
-    <div class="cta surface" data-reveal>
-      <span class="cta__aksara" aria-hidden="true">{site.brand.nameAksara}</span>
+    <div class="cta">
       <div class="cta__inner">
         <span class="eyebrow">Let's talk</span>
         <h2 class="cta__title">
-          Have a process worth <span class="text-grad">building around?</span>
+          Have a process worth <span class="text-accent">building around?</span>
         </h2>
         <p class="cta__lead">
-          Tell us how your business runs. We'll show you what bespoke software
-          can do for it.
+          Tell me how your business runs. I'll show you what custom software and
+          AI can do for it — no obligation.
         </p>
 
         <div class="cta__actions">
-          <Button href={waHref} external>WhatsApp us</Button>
+          <Button href={waHref} external>WhatsApp me</Button>
           <Button href={mailHref} variant="ghost">{email}</Button>
         </div>
 
@@ -49,27 +48,20 @@ const mailHref = `mailto:${email}`;
   .cta {
     position: relative;
     overflow: hidden;
-    padding: clamp(2.5rem, 6vw, 5rem);
-  }
-  .cta__aksara {
-    position: absolute;
-    bottom: -1.5rem;
-    right: -1rem;
-    font-family: var(--font-aksara);
-    font-size: clamp(8rem, 22vw, 18rem);
-    line-height: 1;
-    color: oklch(81% 0.13 85 / 0.06);
-    pointer-events: none;
-    user-select: none;
-    white-space: nowrap;
+    padding: clamp(2.5rem, 6vw, 4.5rem);
+    border-radius: var(--radius-xl);
+    background:
+      radial-gradient(70% 120% at 90% 0%, var(--color-accent-soft) 0%, transparent 55%),
+      var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
   }
   .cta__inner {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
     align-items: flex-start;
-    max-width: 40rem;
+    max-width: 42rem;
   }
   .cta__title {
     font-size: var(--text-3xl);
@@ -94,12 +86,13 @@ const mailHref = `mailto:${email}`;
     border-top: 1px solid var(--color-border);
     width: 100%;
     font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--color-text-muted);
   }
   .cta__links a {
     transition: color var(--duration-fast) var(--ease-out-expo);
   }
   .cta__links a:hover {
-    color: var(--color-gold);
+    color: var(--color-accent);
   }
 </style>

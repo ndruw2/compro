@@ -5,27 +5,27 @@ import SectionHeading from '../ui/SectionHeading.astro';
 
 <section id="services" class="section">
   <div class="container">
-    <SectionHeading eyebrow="What we do" id="services-heading">
-      Software built around the way you work
+    <SectionHeading eyebrow="What I do" id="services-heading">
+      Custom software & AI, built around your business
       <span slot="lead">
-        We don't sell off-the-shelf products. We design and build to fit your
-        business process — end to end.
+        I help teams ship the things clients are actually paying for in 2026 —
+        practical AI and software that earns its keep.
       </span>
     </SectionHeading>
 
-    <div class="bento" role="list">
+    <div class="grid" role="list">
       {
         site.services.map((s, i) => (
           <article
-            class:list={['bento__card', 'surface', `span-${s.span}`]}
+            class="card surface"
             role="listitem"
             data-reveal
-            style={`--reveal-delay: ${i * 70}ms`}
+            style={`--reveal-delay: ${i * 60}ms`}
           >
-            <span class="bento__index">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="bento__title">{s.title}</h3>
-            <p class="bento__blurb">{s.blurb}</p>
-            <ul class="bento__points">
+            <span class="card__index">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="card__title">{s.title}</h3>
+            <p class="card__blurb">{s.blurb}</p>
+            <ul class="card__points">
               {s.points.map((p) => (
                 <li>{p}</li>
               ))}
@@ -38,79 +38,66 @@ import SectionHeading from '../ui/SectionHeading.astro';
 </section>
 
 <style>
-  .bento {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
+  .grid {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .bento__card {
-    padding: clamp(1.5rem, 3vw, 2.25rem);
+  .card {
+    padding: clamp(1.5rem, 3vw, 2rem);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    position: relative;
-    overflow: hidden;
+    gap: 0.7rem;
     transition:
       transform var(--duration-normal) var(--ease-out-expo),
+      box-shadow var(--duration-normal) var(--ease-out-expo),
       border-color var(--duration-normal) var(--ease-out-expo);
   }
-  .bento__card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--grad-aura);
-    opacity: 0;
-    transition: opacity var(--duration-slow) var(--ease-out-expo);
-    pointer-events: none;
-  }
-  .bento__card:hover {
+  .card:hover {
     transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
     border-color: var(--color-border-strong);
   }
-  .bento__card:hover::after {
-    opacity: 1;
-  }
-  .bento__index {
+  .card__index {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    color: var(--color-gold);
+    color: var(--color-accent);
     letter-spacing: 0.1em;
   }
-  .bento__title {
+  .card__title {
     font-size: var(--text-xl);
   }
-  .bento__blurb {
+  .card__blurb {
     color: var(--color-text-muted);
     font-size: var(--text-base);
+    flex: 1;
   }
-  .bento__points {
-    margin: auto 0 0;
-    padding: 0;
+  .card__points {
+    margin: 0;
+    padding: 1rem 0 0;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding-top: 1rem;
   }
-  .bento__points li {
+  .card__points li {
     font-size: var(--text-xs);
-    color: var(--color-text-faint);
+    font-weight: 500;
+    color: var(--color-text-muted);
     padding: 0.3rem 0.7rem;
+    background: var(--color-bg-subtle);
     border: 1px solid var(--color-border);
     border-radius: 999px;
   }
-
-  @media (min-width: 48rem) {
-    .bento {
+  @media (min-width: 40rem) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 64rem) {
+    .grid {
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 1fr;
-    }
-    .span-wide {
-      grid-column: span 2;
-    }
-    .span-tall {
-      grid-row: span 2;
     }
   }
 </style>
