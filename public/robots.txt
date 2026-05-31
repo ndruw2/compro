@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://finendra.pages.dev/sitemap.xml

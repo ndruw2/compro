@@ -1,0 +1,74 @@
+---
+import { site } from '@/config/site';
+import Wordmark from './brand/Wordmark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="container ftr__inner">
+    <div class="ftr__brand">
+      <Wordmark suffix={true} mark={true} />
+      <p class="ftr__tag">{site.brand.tagline}</p>
+    </div>
+    <nav class="ftr__nav" aria-label="Footer">
+      {site.nav.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+  </div>
+  <div class="container ftr__legal">
+    <span>© {year} {site.brand.name} {site.brand.suffix}. {site.brand.locationLabel}.</span>
+    <span class="ftr__aksara" aria-hidden="true">{site.brand.nameAksara}</span>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
+    margin-top: var(--space-section);
+  }
+  .ftr__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    justify-content: space-between;
+  }
+  .ftr__tag {
+    margin-top: 0.9rem;
+    color: var(--color-text-faint);
+    font-size: var(--text-sm);
+    max-width: 32ch;
+  }
+  .ftr__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .ftr__nav a:hover {
+    color: var(--color-gold);
+  }
+  .ftr__legal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+  }
+  .ftr__aksara {
+    font-family: var(--font-aksara);
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    opacity: 0.55;
+  }
+  @media (min-width: 48rem) {
+    .ftr__inner {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+</style>

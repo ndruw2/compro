@@ -1,0 +1,85 @@
+---
+import { site } from '@/config/site';
+import Wordmark from './brand/Wordmark.astro';
+
+const waHref = `https://wa.me/${site.contact.whatsapp}`;
+---
+
+<header class="hdr">
+  <div class="container hdr__inner">
+    <Wordmark suffix={false} mark={true} />
+    <nav class="hdr__nav" aria-label="Primary">
+      {site.nav.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <a class="hdr__cta" href={waHref} target="_blank" rel="noopener noreferrer">
+      Start a project
+    </a>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    background: oklch(15% 0.012 70 / 0.72);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.5rem;
+  }
+  .hdr__nav {
+    display: none;
+    gap: 1.75rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .hdr__nav a {
+    position: relative;
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+  .hdr__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+    width: 100%;
+    height: 1px;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .hdr__nav a:hover {
+    color: var(--color-text);
+  }
+  .hdr__nav a:hover::after {
+    transform: scaleX(1);
+  }
+  .hdr__cta {
+    display: none;
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-strong);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition: border-color var(--duration-fast), color var(--duration-fast);
+  }
+  .hdr__cta:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+  @media (min-width: 52rem) {
+    .hdr__nav {
+      display: flex;
+    }
+    .hdr__cta {
+      display: inline-flex;
+    }
+  }
+</style>

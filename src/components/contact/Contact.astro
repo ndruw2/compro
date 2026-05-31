@@ -1,0 +1,105 @@
+---
+import { site } from '@/config/site';
+import Button from '../ui/Button.astro';
+
+const { email, whatsapp, whatsappDisplay, socials } = site.contact;
+const waHref = `https://wa.me/${whatsapp}`;
+const mailHref = `mailto:${email}`;
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="cta surface" data-reveal>
+      <span class="cta__aksara" aria-hidden="true">{site.brand.nameAksara}</span>
+      <div class="cta__inner">
+        <span class="eyebrow">Let's talk</span>
+        <h2 class="cta__title">
+          Have a process worth <span class="text-grad">building around?</span>
+        </h2>
+        <p class="cta__lead">
+          Tell us how your business runs. We'll show you what bespoke software
+          can do for it.
+        </p>
+
+        <div class="cta__actions">
+          <Button href={waHref} external>WhatsApp us</Button>
+          <Button href={mailHref} variant="ghost">{email}</Button>
+        </div>
+
+        <ul class="cta__links" role="list">
+          <li>
+            <a href={waHref} target="_blank" rel="noopener noreferrer">{whatsappDisplay}</a>
+          </li>
+          {
+            socials.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer">
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2.5rem, 6vw, 5rem);
+  }
+  .cta__aksara {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1rem;
+    font-family: var(--font-aksara);
+    font-size: clamp(8rem, 22vw, 18rem);
+    line-height: 1;
+    color: oklch(81% 0.13 85 / 0.06);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .cta__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: flex-start;
+    max-width: 40rem;
+  }
+  .cta__title {
+    font-size: var(--text-3xl);
+  }
+  .cta__lead {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  .cta__links {
+    margin: 1.5rem 0 0;
+    padding: 1.5rem 0 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .cta__links a {
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+  .cta__links a:hover {
+    color: var(--color-gold);
+  }
+</style>

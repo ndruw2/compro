@@ -1,0 +1,78 @@
+---
+import { site } from '@/config/site';
+import SectionHeading from '../ui/SectionHeading.astro';
+---
+
+<section id="approach" class="section approach">
+  <div class="container">
+    <SectionHeading eyebrow="How we work" id="approach-heading">
+      Every project, treated like a client
+      <span slot="lead">
+        We study the business before we write code. The process leads; the
+        software follows.
+      </span>
+    </SectionHeading>
+
+    <ol class="steps">
+      {
+        site.approach.map((s, i) => (
+          <li class="step" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
+            <span class="step__num">{s.step}</span>
+            <div class="step__body">
+              <h3 class="step__title">{s.title}</h3>
+              <p class="step__text">{s.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0;
+    counter-reset: step;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--color-border);
+    transition: padding-left var(--duration-normal) var(--ease-out-expo);
+  }
+  .step:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .step:hover {
+    padding-left: 0.75rem;
+  }
+  .step__num {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: oklch(81% 0.13 85 / 0.45);
+    line-height: 1;
+  }
+  .step__title {
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+  }
+  .step__text {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+  @media (min-width: 48rem) {
+    .step {
+      grid-template-columns: 5rem 1fr;
+      align-items: baseline;
+    }
+    .step__num {
+      font-size: var(--text-3xl);
+    }
+  }
+</style>

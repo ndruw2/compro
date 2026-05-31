@@ -1,0 +1,59 @@
+---
+import { site } from '@/config/site';
+
+interface Props {
+  /** show the "Consulting" suffix */
+  suffix?: boolean;
+  /** include the small Aksara Jawa mark before the wordmark */
+  mark?: boolean;
+  size?: 'sm' | 'md';
+}
+
+const { suffix = false, mark = true, size = 'sm' } = Astro.props;
+const { name, suffix: suffixText, nameAksara } = site.brand;
+---
+
+<a class={`wordmark wordmark--${size}`} href="/" aria-label={`${name} ${suffixText}, home`}>
+  {mark && <span class="wordmark__aksara" aria-hidden="true">{nameAksara}</span>}
+  <span class="wordmark__text">
+    <span class="wordmark__name">{name}</span>
+    {suffix && <span class="wordmark__suffix">{suffixText}</span>}
+  </span>
+</a>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1;
+  }
+  .wordmark__aksara {
+    font-family: var(--font-aksara);
+    font-size: 1.6em;
+    color: var(--color-gold);
+    line-height: 1;
+    transform: translateY(0.05em);
+  }
+  .wordmark__text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5ch;
+  }
+  .wordmark__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: var(--text-lg);
+  }
+  .wordmark--md .wordmark__name {
+    font-size: var(--text-xl);
+  }
+  .wordmark__suffix {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+</style>

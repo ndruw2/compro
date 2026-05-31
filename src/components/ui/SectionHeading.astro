@@ -1,0 +1,39 @@
+---
+interface Props {
+  eyebrow: string;
+  id?: string;
+  align?: 'start' | 'center';
+}
+
+const { eyebrow, id, align = 'start' } = Astro.props;
+---
+
+<div class={`sh sh--${align}`} data-reveal>
+  <span class="eyebrow">{eyebrow}</span>
+  <h2 id={id} class="sh__title"><slot /></h2>
+  <p class="sh__lead"><slot name="lead" /></p>
+</div>
+
+<style>
+  .sh {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 46rem;
+  }
+  .sh--center {
+    align-items: center;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .sh__title {
+    font-size: var(--text-3xl);
+  }
+  .sh__lead {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+  .sh__lead:empty {
+    display: none;
+  }
+</style>
